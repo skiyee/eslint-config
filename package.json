@@ -3,7 +3,10 @@
   "type": "module",
   "version": "0.0.1",
   "description": "skiyee's eslint config",
-  "author": "skiyee",
+  "author": {
+    "name": "skiyee",
+    "email": "319619193@qq.com"
+  },
   "license": "MIT",
   "homepage": "https://github.com/skiyee/eslint-config",
   "repository": {
@@ -14,13 +17,23 @@
     "eslint",
     "eslint-config"
   ],
-  "main": "index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
     "typegen": "esno scripts/typegen.ts",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit",
+    "build": "pnpm typegen && tsup",
+    "release": "bumpp"
   },
   "peerDependencies": {
     "@eslint-react/eslint-plugin": ">=1.26.0",
@@ -88,6 +101,7 @@
     "@types/node": "^22.12.0",
     "@unocss/eslint-plugin": "^65.4.3",
     "@vitest/eslint-plugin": "^1.1.25",
+    "bumpp": "^10.0.1",
     "commitizen": "^4.3.1",
     "cz-git": "^1.11.0",
     "eslint": "^9.19.0",
@@ -96,7 +110,8 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.18",
     "eslint-typegen": "^1.0.0",
-    "esno": "^4.8.0"
+    "esno": "^4.8.0",
+    "tsup": "^8.3.6"
   },
   "config": {
     "commitizen": {

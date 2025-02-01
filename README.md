@@ -17,7 +17,7 @@ export default skiyee()
 
 ## IDE 自动格式化
 
-```json
+```jsonc
 // .vscode/settings.json
 {
   // Disable the default formatter, use eslint instead
