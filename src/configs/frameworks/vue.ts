@@ -52,6 +52,8 @@ export async function vue(
           shallowRef: 'readonly',
           toRef: 'readonly',
           toRefs: 'readonly',
+          uni: 'readonly',
+          uniCloud: 'readonly',
           watch: 'readonly',
           watchEffect: 'readonly',
         },
@@ -115,7 +117,12 @@ export async function vue(
         // only allows <script setup>.
         'vue/component-api-style': ['error', ['script-setup']],
         'vue/component-name-in-template-casing': ['error', 'PascalCase', {
-          globals: ['RouterView', 'RouterLink'],
+          globals: [
+            // VueRouter
+            'RouterView', 'RouterLink',
+            // Uniapp
+            'ScrollView', 'PageMeta',
+          ],
           registeredComponentsOnly: false,
         }],
         'vue/component-options-name-casing': ['error', 'PascalCase'],
