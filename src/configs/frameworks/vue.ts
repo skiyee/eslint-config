@@ -119,7 +119,9 @@ export async function vue(
         'vue/component-name-in-template-casing': ['error', 'PascalCase', {
           globals: [
             // VueRouter
-            'RouterView', 'RouterLink',
+            'RouterView', 'RouterLink',            
+          ],
+          ignores: [
             // Uniapp
             'scroll-view', 'page-meta', 'rich-text',
           ],
