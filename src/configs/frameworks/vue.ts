@@ -121,7 +121,7 @@ export async function vue(
             // VueRouter
             'RouterView', 'RouterLink',
             // Uniapp
-            'ScrollView', 'PageMeta',
+            'scroll-view', 'page-meta', 'rich-text',
           ],
           registeredComponentsOnly: false,
         }],
