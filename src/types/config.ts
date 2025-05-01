@@ -91,17 +91,7 @@ export interface SkiyeeEslintConfigOptions extends OptionComponentExts, OptionPr
    */
   regexp?: boolean | (OptionRegExp & OptionOverrides);
 
-  /**
-   * Enable react rules.
-   *
-   * Requires installing:
-   * - `@eslint-react/eslint-plugin`
-   * - `eslint-plugin-react-hooks`
-   * - `eslint-plugin-react-refresh`
-   *
-   * @default false
-   */
-  react?: boolean | OptionOverrides;
+
 
   /**
    * Enable unocss rules.

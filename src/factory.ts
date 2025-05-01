@@ -19,7 +19,6 @@ import {
   jsx,
   node,
   perfectionist,
-  react,
   regexp,
   sortPackageJson,
   sortTsconfig,
@@ -49,11 +48,6 @@ const VuePackages = [
 ]
 
 export const defaultPluginRenaming = {
-  '@eslint-react': 'react',
-  '@eslint-react/dom': 'react-dom',
-  '@eslint-react/hooks-extra': 'react-hooks-extra',
-  '@eslint-react/naming-convention': 'react-naming-convention',
-
   '@stylistic': 'style',
 
   '@typescript-eslint': 'ts',
@@ -83,7 +77,6 @@ export function skiyee(
     gitignore: enableGitignore = true,
     jsonc: enableJsonc = true,
     jsx: enableJsx = true,
-    react: enableReact = false,
     regexp: enableRegexp = true,
     typescript: enableTypeScript = isPackageExists('typescript'),
     unicorn: enableUnicorn = true,
@@ -192,12 +185,7 @@ export function skiyee(
     }))
   }
 
-  if (enableReact) {
-    configs.push(react({
-      overrides: getOverrides(options, 'react'),
-      tsconfigPath,
-    }))
-  }
+
 
   if (enableUnoCSS) {
     configs.push(unocss({

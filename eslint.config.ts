@@ -3,7 +3,6 @@ import { skiyee } from './src'
 export default skiyee(
   {
     vue: true,
-    react: true,
     typescript: true,
     formatters: true,
     type: 'lib',
