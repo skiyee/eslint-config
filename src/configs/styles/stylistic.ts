@@ -45,7 +45,7 @@ export async function stylistic(
 
         'curly': ['error', 'all'],
 
-        'style/brace-style': ['error', '1tbs', { allowSingleLine: false }],
+        'style/brace-style': ['error', 'stroustrup', { allowSingleLine: false }],
         'style/member-delimiter-style': ['error', { multiline: { delimiter: 'semi' } }],
 
         ...overrides,
