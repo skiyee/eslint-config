@@ -119,7 +119,7 @@ export async function vue(
         'vue/component-name-in-template-casing': ['error', 'PascalCase', {
           globals: [
             // VueRouter
-            'RouterView', 'RouterLink',            
+            'RouterView', 'RouterLink',
           ],
           ignores: [
             // Uniapp
@@ -132,7 +132,7 @@ export async function vue(
         'vue/component-tags-order': 'off',
         'vue/custom-event-name-casing': ['error', 'camelCase'],
         'vue/define-macros-order': ['error', {
-          order: ['defineOptions', 'defineModel', 'defineProps', 'defineEmits', 'defineSlots'],
+          order: ['defineOptions', 'defineProps', 'defineModel', 'defineEmits', 'defineSlots'],
         }],
         'vue/dot-location': ['error', 'property'],
         'vue/dot-notation': ['error', { allowKeywords: true }],
