@@ -1,131 +1,42 @@
 name: Release
 
-permissions:
-  contents: read
-  id-token: write
-
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
   release:
-    name: 构建并发版
-    runs-on: ubuntu-latest
     permissions:
+      id-token: write
       contents: write
+    runs-on: ubuntu-latest
     steps:
-      - name: 检出代码
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
-      - name: 生成发布日志 (changelog.md)
-        id: generate_changelog
-        shell: bash
-        run: |
-          set -e
-          
-          TAGS=$(git tag -l --sort=-committerdate | head -n 2)
-          CURRENT_TAG=$(echo "$TAGS" | sed -n '1p')
-          PREVIOUS_TAG=$(echo "$TAGS" | sed -n '2p')
-          
-          echo "Current: $CURRENT_TAG, Previous: $PREVIOUS_TAG"
-          
-          if [ -z "$PREVIOUS_TAG" ]; then
-            RANGE="$CURRENT_TAG"
-          else
-            RANGE="$PREVIOUS_TAG..$CURRENT_TAG"
-          fi
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
 
-          RAW_LOGS=$(git log --pretty=format:"%s - by @%an (%h)" "$RANGE")
-
-          get_commits() {
-            local grep_pattern="$1"
-            echo "$RAW_LOGS" | grep -E "$grep_pattern" || true
-          }
-
-          echo "# Release $CURRENT_TAG" > changelog.md
-          echo "" >> changelog.md
-
-          BREAKING=$(git log --pretty=format:"%s - by @%an (%h)" "$RANGE" --grep="BREAKING CHANGE" --grep="!:" || true)
-          if [ -n "$BREAKING" ]; then
-            echo "### 🚨 BREAKING CHANGES 破坏性更新" >> changelog.md
-            echo "$BREAKING" | sed 's/^/- /' >> changelog.md
-            echo "" >> changelog.md
-          fi
-
-          # 处理各个分类
-          # 定义分类映射：显示标题|grep正则
-          categories=(
-            "🚀 Features 新功能|^feat"
-            "🩹 Fixes 缺陷修复|^fix"
-            "📖 Documentation 文档|^docs"
-            "🔥 Performance 性能优化|^perf"
-            "♻️ Refactors 重构|^refactor"
-          )
-
-          for category in "${categories[@]}"; do
-            TITLE="${category%%|*}"
-            PATTERN="${category##*|}"
-            
-            MSGS=$(get_commits "$PATTERN")
-            if [ -n "$MSGS" ]; then
-              echo "### $TITLE" >> changelog.md
-              # 给每一行添加列表符号
-              echo "$MSGS" | sed 's/^/- /' >> changelog.md
-              echo "" >> changelog.md
-            fi
-          done
-
-          echo "Changelog generated:"
-          cat changelog.md
-
-      - name: 创建 GitHub Release
-        uses: ncipollo/release-action@v1.14.0
-        with:
-          bodyFile: changelog.md
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-  publish:
-    name: 发布到 NPM
-    needs: release
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
-    
-    steps:
-      - name: 检出代码
-        uses: actions/checkout@v4
-
-      - name: 安装 PNPM
-        uses: pnpm/action-setup@v3
-        with:
-          version: latest
-
-      - name: 配置 Node.js
-        uses: actions/setup-node@v4
+      - name: Set node
+        uses: actions/setup-node@v6
         with:
           node-version: lts/*
-          registry-url: 'https://registry.npmjs.org'
+          cache: pnpm
+          registry-url: "https://registry.npmjs.org"
 
-      - name: 安装依赖
-        run: pnpm i --frozen-lockfile
+      - run: npm i -g npm@latest
 
-      - name: 打包
+      - run: pnpm dlx changelogithub
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Install
+        run: pnpm install
+
+      - name: Build
         run: pnpm build
 
-      - name: 检查版本一致性
-        run: |
-          PKG_VERSION=$(node -p "require('./package.json').version")
-          if [[ "v$PKG_VERSION" != "${{ github.ref_name }}" ]]; then
-            echo "Error: Tag ${{ github.ref_name }} does not match package.json version v$PKG_VERSION"
-            exit 1
-          fi
-
-      - name: 发布到 NPM
-        run: pnpm publish --access public --no-git-checks --tag latest
-        env:
-          NPM_CONFIG_PROVENANCE: true
+      - name: Publish to NPM
+        run: pnpm publish --access public --no-git-checks

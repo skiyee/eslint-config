@@ -2,6 +2,7 @@
   "name": "@skiyee/eslint-config",
   "type": "module",
   "version": "0.2.0",
+  "packageManager": "pnpm@10.34.1",
   "description": "skiyee's eslint config",
   "author": {
     "name": "skiyee",
