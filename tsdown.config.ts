@@ -1,4 +1,4 @@
-import { defineConfig } from 'tsup'
+import { defineConfig } from 'tsdown'
 
 export default defineConfig({
   entry: [
@@ -8,4 +8,7 @@ export default defineConfig({
   clean: true,
   shims: true,
   format: ['esm', 'cjs'],
+  outputOptions: {
+    exports: 'named',
+  },
 })

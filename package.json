@@ -32,7 +32,7 @@
     "typegen": "esno scripts/typegen.ts",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit",
-    "build": "pnpm typegen && tsup",
+    "build": "pnpm typegen && tsdown",
     "release": "bumpp"
   },
   "peerDependencies": {
@@ -96,7 +96,7 @@
     "eslint-plugin-no-only-tests": "^3.3.0",
     "eslint-typegen": "^1.0.0",
     "esno": "^4.8.0",
-    "tsup": "^8.3.6",
+    "tsdown": "^0.22.3",
     "typescript": "^5.9.3"
   },
   "config": {
