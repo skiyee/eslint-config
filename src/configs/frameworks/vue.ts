@@ -120,10 +120,74 @@ export async function vue(
           globals: [
             // VueRouter
             'RouterView', 'RouterLink',
+            // Oiyo
+            'OiyoLayout', 'OiyoPage',
           ],
           ignores: [
-            // Uniapp
-            'scroll-view', 'page-meta', 'rich-text',
+            /** UniApp 内置组件 */
+            // 视图容器类
+            'scroll-view',
+            'view',
+            'swiper',
+            'swiper-item',
+            'match-media',
+            'movable-area',
+            'movable-view',
+            'cover-view',
+            'cover-image',
+
+            // 基础内容类
+            'icon',
+            'text',
+            'rich-text',
+            'progress',
+
+            // 表单交互类
+            'button',
+            'form',
+            'input',
+            'textarea',
+            'checkbox',
+            'checkbox-group',
+            'radio',
+            'radio-group',
+            'switch',
+            'slider',
+            'picker',
+            'picker-view',
+            'picker-view-column',
+            'label',
+            'editor',
+
+            // 媒体类
+            'image',
+            'video',
+            'audio',
+            'camera',
+            'live-player',
+            'live-pusher',
+
+            // 地图与画布类
+            'map',
+            'canvas',
+
+            // 导航与其他类
+            'navigator',
+            'web-view',
+            'page-meta',
+            'navigation-bar',
+            'custom-tab-bar',
+
+            // 广告类
+            'ad',
+            'ad-draw',
+
+            // uniCloud 相关内置组件
+            'unicloud-db',
+
+            // 小程序专有内置组件 (依平台支持情况而定)
+            'open-data',
+            'official-account',
           ],
           registeredComponentsOnly: false,
         }],
