@@ -1,4 +1,4 @@
-import { skiyee } from './src'
+import { skiyee } from '@skiyee/eslint-config'
 
 export default skiyee(
   {
