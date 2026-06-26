@@ -54,6 +54,7 @@ export const GLOB_EXCLUDE = [
   '**/pnpm-lock.yaml',
   '**/bun.lockb',
 
+  '**/.oiyo',
   '**/output',
   '**/coverage',
   '**/temp',
@@ -78,4 +79,6 @@ export const GLOB_EXCLUDE = [
   '**/__snapshots__',
   '**/auto-import?(s).d.ts',
   '**/components.d.ts',
+  '**/pages.json',
+  '**/manifest.json',
 ]
