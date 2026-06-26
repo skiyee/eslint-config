@@ -1,0 +1,19 @@
+{
+  "name": "example",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "oiyo dev",
+    "build": "oiyo build",
+    "typecheck": "vue-tsc --noEmit",
+    "postinstall": "oiyo prepare"
+  },
+  "dependencies": {
+    "@skiyee/oiyo": "latest"
+  },
+  "devDependencies": {
+    "vite": "5.2.8",
+    "vue-tsc": "^3.2.7"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "globalStyle": {
+    "backgroundColor": "#F8FAFC",
+    "backgroundColorTop": "#F8FAFC",
+    "backgroundColorBottom": "#F8FAFC",
+    "backgroundTextStyle": "dark",
+    "navigationStyle": "default",
+    "navigationBarTitleText": "example",
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#F8FAFC"
+  },
+  "pages": [
+    {
+      "path": "pages/home/index"
+    }
+  ]
+}
